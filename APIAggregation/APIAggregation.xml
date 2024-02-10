@@ -1,0 +1,1090 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>APIAggregation</name>
+    </assembly>
+    <members>
+        <member name="T:APIAggregation.ConfigurationSettings">
+            <summary>
+            The configuration file.
+            </summary>
+        </member>
+        <member name="F:APIAggregation.ConfigurationSettings._configuration">
+            <summary>
+            The Configuration
+            </summary>
+        </member>
+        <member name="F:APIAggregation.ConfigurationSettings.weatherServicesModel">
+            <summary>
+            The Weather Services
+            </summary>
+        </member>
+        <member name="F:APIAggregation.ConfigurationSettings.jokeServicesModel">
+            <summary>
+            The Joke Services
+            </summary>
+        </member>
+        <member name="M:APIAggregation.ConfigurationSettings.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            ctor
+            </summary>
+            <param name="configuration"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:APIAggregation.Controllers.JokeController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:APIAggregation.Controllers.JokeController.#ctor(APIAggregation.Services.Joke.JokeService)">
+            <summary>
+            ctor
+            </summary>
+            <param name="jokeService"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:APIAggregation.Controllers.JokeController.GetJoke(APIAggregation.WebServiceRequests.GetJokeRequest)">
+            <summary>
+            Returns a Joke 
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:APIAggregation.Controllers.JokeController.GetStringValueFromFlags``1(``0)">
+            <summary>
+            Retrieve the name of each Enum of flags.
+            </summary>
+            <typeparam name="T">The enum type that you want to retrieve the strings.</typeparam>
+            <param name="flags">The enum Flags</param>
+            <returns></returns>
+        </member>
+        <member name="T:APIAggregation.Controllers.WeatherForecastController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:APIAggregation.Controllers.WeatherForecastController.#ctor(System.Collections.Generic.IEnumerable{APIAggregation.Services.Weather.IWeatherServices})">
+            <summary>
+            ctor
+            </summary>
+            <param name="weatherServices"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:APIAggregation.Controllers.WeatherForecastController.GetCityWeather(APIAggregation.WebServiceRequests.GetWeatherForecastLatitudeLongitudeRequest)">
+            <summary>
+            The Weather that has when you search for city
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+            <exception cref="T:System.Exception">Application Exception of Endpoint</exception>
+        </member>
+        <member name="M:APIAggregation.Controllers.WeatherForecastController.GetWeatherForecastLatitudeLongitude(APIAggregation.WebServiceRequests.WeatherForecastLatitudeLongtitudeRequest)">
+            <summary>
+            The Weather that has when you search for latitude and longitude
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+            <exception cref="T:System.Exception">Application Exception of Endpoint</exception>
+        </member>
+        <member name="T:APIAggregation.Helpers.HttpClients">
+            <summary>
+            The HTTP Clients
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Helpers.HttpClients.OpenWeather">
+            <summary>
+            OpenWeather
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Helpers.HttpClients.WeatherVisual">
+            <summary>
+            WeatherVisual
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Helpers.HttpClients.JokeApi">
+            <summary>
+            Joke API
+            </summary>
+        </member>
+        <member name="T:APIAggregation.Helpers.Enum">
+            <summary>
+            Enum file
+            </summary>
+        </member>
+        <member name="T:APIAggregation.Helpers.Enum.ErrorCodes">
+            <summary>
+            Error Codes
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Helpers.Enum.ErrorCodes.NoError">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Helpers.Enum.ErrorCodes.SystemError">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:APIAggregation.Helpers.Enum.Languages">
+            <summary>
+            Languages
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Helpers.Enum.Languages.EN">
+            <summary>
+            English
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Helpers.Enum.Languages.DE">
+            <summary>
+            German
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Helpers.Enum.Languages.CS">
+            <summary>
+            Czech
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Helpers.Enum.Languages.ES">
+            <summary>
+            Spanish
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Helpers.Enum.Languages.FR">
+            <summary>
+            French
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Helpers.Enum.Languages.PT">
+            <summary>
+            Portuguese
+            </summary>
+        </member>
+        <member name="T:APIAggregation.Helpers.Enum.Categories">
+            <summary>
+            Flags of categories
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Helpers.Enum.Categories.Any">
+            <summary>
+            Any
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Helpers.Enum.Categories.Programming">
+            <summary>
+            Programming
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Helpers.Enum.Categories.Miscellaneous">
+            <summary>
+            Misc
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Helpers.Enum.Categories.Dark">
+            <summary>
+            Dark
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Helpers.Enum.Categories.Pun">
+            <summary>
+            Pun
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Helpers.Enum.Categories.Spooky">
+            <summary>
+            Spooky
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Helpers.Enum.Categories.Christmas">
+            <summary>
+            Christmas
+            </summary>
+        </member>
+        <member name="T:APIAggregation.Helpers.Enum.WeatherUnit">
+            <summary>
+            The Units that the weather was available.
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Helpers.Enum.WeatherUnit.C">
+            <summary>
+            Celsius
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Helpers.Enum.WeatherUnit.F">
+            <summary>
+            Fahrenheit 
+            </summary>
+        </member>
+        <member name="T:APIAggregation.Helpers.Extensions">
+            <summary>
+            Extensions to use in the application
+            </summary>
+        </member>
+        <member name="M:APIAggregation.Helpers.Extensions.SwaggerGenerator(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Method to create the Swagger information
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:APIAggregation.Helpers.Extensions.AddServicesInDI(Microsoft.Extensions.DependencyInjection.IServiceCollection,APIAggregation.ConfigurationSettings)">
+            <summary>
+            Add Services in DI
+            </summary>
+            <param name="services"></param>
+            <param name="configurationSettings"></param>
+            <returns></returns>
+        </member>
+        <member name="M:APIAggregation.Helpers.Extensions.ExecuteRequest(System.Net.Http.IHttpClientFactory,System.Net.Http.HttpMethod,System.String,System.String,System.Net.Http.StringContent)">
+            <summary>
+            Execute request and returns you string
+            </summary>
+            <param name="httpClient">The HTTP Client</param>
+            <param name="httpMethod">The HTTP Method</param>
+            <param name="uri">The URI</param>
+            <param name="httpClientName">The HTTP Client Name</param>
+            <param name="request">The request if exists</param>
+            <returns></returns>
+        </member>
+        <member name="M:APIAggregation.Helpers.Extensions.ExecuteRequest``1(System.Net.Http.IHttpClientFactory,System.Net.Http.HttpMethod,System.String,System.String,System.Net.Http.StringContent)">
+            <summary>
+            Execute request and returns you the model T
+            </summary>
+            <param name="httpClient">The HTTP Client</param>
+            <param name="httpMethod">The HTTP Method</param>
+            <param name="uri">The URI</param>
+            <param name="httpClientName">The HTTP Client Name</param>
+            <param name="request">The request if exists</param>
+            <returns></returns>
+        </member>
+        <member name="M:APIAggregation.Helpers.Extensions.ExecuteRequestPrivate(System.Net.Http.IHttpClientFactory,System.Net.Http.HttpMethod,System.String,System.String,System.Net.Http.StringContent)">
+            <summary>
+            The private Method to do the HTTP Call.
+            </summary>
+            <param name="httpClient"></param>
+            <param name="httpMethod"></param>
+            <param name="uri"></param>
+            <param name="httpClientName"></param>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:APIAggregation.Helpers.Extensions.ToWeatherResponseModel(APIAggregation.WebServiceRequests.OpenWeatherMap.OpenWeatherMapResponse)">
+            <summary>
+            Extensions that converts the response of Open Weather to response Model
+            </summary>
+            <param name="response"></param>
+            <returns></returns>
+        </member>
+        <member name="M:APIAggregation.Helpers.Extensions.ToWeatherResponseModel(APIAggregation.WebServiceRequests.Sera.WeatherVisualResponse)">
+            <summary>
+            Extensions that converts the response of Weather Visaul to response Model
+            </summary>
+            <param name="response"></param>
+            <returns></returns>
+        </member>
+        <member name="T:APIAggregation.Helpers.HandlingMiddleware">
+            <summary>
+            The Middleware
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Helpers.HandlingMiddleware.requestDelegate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Helpers.HandlingMiddleware.logger">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:APIAggregation.Helpers.HandlingMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{APIAggregation.Helpers.HandlingMiddleware})">
+            <summary>
+            
+            </summary>
+            <param name="requestDelegate"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:APIAggregation.Helpers.HandlingMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:APIAggregation.Helpers.HandlingMiddleware.HandleException(Microsoft.AspNetCore.Http.HttpContext,System.Exception)">
+            <summary>
+            Method to Handle the Exception
+            </summary>
+            <param name="context"></param>
+            <param name="ex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:APIAggregation.Helpers.HandlingMiddleware.HandleEnterLog(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Method to Handle the Enter of Each Call
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:APIAggregation.Helpers.HandlingMiddleware.GetRequestBodyAsync(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Retrieve the Body Request to log it
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="T:APIAggregation.Models.ServicesModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:APIAggregation.Models.ServicesModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.Models.ServicesModel.AppEndpoints">
+            <summary>
+            AppEndpoints
+            </summary>
+        </member>
+        <member name="T:APIAggregation.Models.AppEndpoint">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.Models.AppEndpoint.Code">
+            <summary>
+            The code of Service
+            </summary>
+        </member>
+        <member name="P:APIAggregation.Models.AppEndpoint.Id">
+            <summary>
+            The ID of Service
+            </summary>
+        </member>
+        <member name="P:APIAggregation.Models.AppEndpoint.BaseAddress">
+            <summary>
+            The Base Address of Service
+            </summary>
+        </member>
+        <member name="P:APIAggregation.Models.AppEndpoint.AppKey">
+            <summary>
+            The app key if contains
+            </summary>
+        </member>
+        <member name="P:APIAggregation.Models.AppEndpoint.Cache">
+            <summary>
+            The cache timne if has
+            </summary>
+        </member>
+        <member name="T:APIAggregation.Services.Joke.JokeService">
+            <summary>
+            https://jokeapi.dev/
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Services.Joke.JokeService._httpClientFactory">
+            <summary>
+            The HTTP Client Factory
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Services.Joke.JokeService._cache">
+            <summary>
+            Memory cache Service
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Services.Joke.JokeService._configurationSettings">
+            <summary>
+            Configuration of Project
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Services.Joke.JokeService.appEndpoint">
+            <summary>
+            The Endpoint Service Configuration
+            </summary>
+        </member>
+        <member name="M:APIAggregation.Services.Joke.JokeService.#ctor(System.Net.Http.IHttpClientFactory,Microsoft.Extensions.Caching.Memory.IMemoryCache,Microsoft.Extensions.Options.IOptions{APIAggregation.ConfigurationSettings})">
+            <summary>
+            ctor
+            </summary>
+            <param name="httpClientFactory"></param>
+            <param name="cache"></param>
+            <param name="configurationSettings"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:APIAggregation.Services.Joke.JokeService.GetJoke(System.Collections.Generic.List{System.String},APIAggregation.Helpers.Enum.Languages)">
+            <summary>
+            Method to return Joke based on the language and the categories
+            </summary>
+            <param name="categories">The categories that you want to search for</param>
+            <param name="language">The language that you want to retrieve the information</param>
+            <returns></returns>
+        </member>
+        <member name="T:APIAggregation.Services.Weather.IWeatherServices">
+            <summary>
+            Retrieve 
+            </summary>
+        </member>
+        <member name="P:APIAggregation.Services.Weather.IWeatherServices.WeatherServiceId">
+            <summary>
+            The Weather Service ID
+            </summary>
+        </member>
+        <member name="M:APIAggregation.Services.Weather.IWeatherServices.RetrieveWeather(System.String,APIAggregation.Helpers.Enum.WeatherUnit)">
+            <summary>
+            Retrieve weather from City.
+            </summary>
+            <param name="city">The city name that you want to search</param>
+            <param name="unit">The unit</param>
+            <returns>The model of weather that returns if the city exists. Response is cached for X minutes refer appsettings</returns>
+        </member>
+        <member name="M:APIAggregation.Services.Weather.IWeatherServices.RetrieveWeather(System.Double,System.Double,APIAggregation.Helpers.Enum.WeatherUnit)">
+            <summary>
+            Retrieve Weather from latitude and longitude
+            </summary>
+            <param name="lat">The latitude that you want to search</param>
+            <param name="lon">The longitude that you want to search</param>
+            <param name="unit">The unit</param>
+            <returns>The model of weather that returns if the cthis long and lat exists. Response is cached for X minutes refer appsettings</returns>
+        </member>
+        <member name="T:APIAggregation.Services.Weather.OpenWeatherMapService">
+            <summary>
+            Open Weather map Documentation https://openweathermap.org/api/one-call-3
+            NOTES:
+                One Call API 3.0 every 10 minutes.
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Services.Weather.OpenWeatherMapService._httpClientFactory">
+            <summary>
+            The HTTP Client Factory
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Services.Weather.OpenWeatherMapService._cache">
+            <summary>
+            Memory cache Service
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Services.Weather.OpenWeatherMapService._configurationSettings">
+            <summary>
+            Configuration of Project
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Services.Weather.OpenWeatherMapService.appEndpoint">
+            <summary>
+            The Endpoint Service Configuration
+            </summary>
+        </member>
+        <member name="P:APIAggregation.Services.Weather.OpenWeatherMapService.WeatherServiceId">
+            <summary>
+            The configuration Weather service ID
+            </summary>
+        </member>
+        <member name="M:APIAggregation.Services.Weather.OpenWeatherMapService.#ctor(System.Net.Http.IHttpClientFactory,Microsoft.Extensions.Caching.Memory.IMemoryCache,Microsoft.Extensions.Options.IOptions{APIAggregation.ConfigurationSettings})">
+            <summary>
+            ctor
+            </summary>
+            <param name="httpClientFactory"></param>
+            <param name="cache"></param>
+            <param name="configurationSettings"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:APIAggregation.Services.Weather.OpenWeatherMapService.RetrieveWeather(System.String,APIAggregation.Helpers.Enum.WeatherUnit)">
+            <summary>
+            Retrieve weather from City.
+            </summary>
+            <param name="city">The city name that you want to search</param>
+            <param name="unit">The unit</param>
+            <returns>The model of weather that returns if the city exists. Response is cached for X minutes refer appsettings</returns>
+        </member>
+        <member name="M:APIAggregation.Services.Weather.OpenWeatherMapService.RetrieveWeather(System.Double,System.Double,APIAggregation.Helpers.Enum.WeatherUnit)">
+            <summary>
+            Retrieve Weather from latitude and longitude
+            </summary>
+            <param name="lat">The latitude that you want to search</param>
+            <param name="lon">The longitude that you want to search</param>
+            <param name="unit">The unit</param>
+            <returns>The model of weather that returns if the cthis long and lat exists. Response is cached for X minutes refer appsettings</returns>
+        </member>
+        <member name="M:APIAggregation.Services.Weather.OpenWeatherMapService.GetWeather(System.String,APIAggregation.Helpers.Enum.WeatherUnit)">
+            <summary>
+            Returns the Open Weather Model.
+            </summary>
+            <param name="url">The URL</param>
+            <param name="unit">The unit</param>
+            <returns></returns>
+        </member>
+        <member name="T:APIAggregation.Services.Weather.WeatherVisualCrossingService">
+            <summary>
+            https://www.visualcrossing.com/resources/documentation/weather-api/timeline-weather-api/
+            https://www.visualcrossing.com/weather/weather-data-services
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Services.Weather.WeatherVisualCrossingService._httpClientFactory">
+            <summary>
+            The HTTP Client Factory
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Services.Weather.WeatherVisualCrossingService._cache">
+            <summary>
+            Memory cache Service
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Services.Weather.WeatherVisualCrossingService._configurationSettings">
+            <summary>
+            Configuration of Project
+            </summary>
+        </member>
+        <member name="F:APIAggregation.Services.Weather.WeatherVisualCrossingService.appEndpoint">
+            <summary>
+            The Endpoint Service Configuration
+            </summary>
+        </member>
+        <member name="P:APIAggregation.Services.Weather.WeatherVisualCrossingService.WeatherServiceId">
+            <summary>
+            The configuration Weather service ID
+            </summary>
+        </member>
+        <member name="M:APIAggregation.Services.Weather.WeatherVisualCrossingService.#ctor(System.Net.Http.IHttpClientFactory,Microsoft.Extensions.Caching.Memory.IMemoryCache,Microsoft.Extensions.Options.IOptions{APIAggregation.ConfigurationSettings})">
+            <summary>
+            ctor
+            </summary>
+            <param name="httpClientFactory"></param>
+            <param name="cache"></param>
+            <param name="configurationSettings"></param>
+        </member>
+        <member name="M:APIAggregation.Services.Weather.WeatherVisualCrossingService.RetrieveWeather(System.String,APIAggregation.Helpers.Enum.WeatherUnit)">
+            <summary>
+            Retrieve weather from City.
+            </summary>
+            <param name="city">The city name that you want to search</param>
+            <param name="unit">The unit</param>
+            <returns>The model of weather that returns if the city exists. Response is cached for X minutes refer appsettings</returns>
+        </member>
+        <member name="M:APIAggregation.Services.Weather.WeatherVisualCrossingService.RetrieveWeather(System.Double,System.Double,APIAggregation.Helpers.Enum.WeatherUnit)">
+            <summary>
+            Retrieve Weather from latitude and longitude
+            </summary>
+            <param name="lat">The latitude that you want to search</param>
+            <param name="lon">The longitude that you want to search</param>
+            <param name="unit">The unit</param>
+            <returns>The model of weather that returns if the cthis long and lat exists. Response is cached for X minutes refer appsettings</returns>
+        </member>
+        <member name="M:APIAggregation.Services.Weather.WeatherVisualCrossingService.GetWeather(System.String,APIAggregation.Helpers.Enum.WeatherUnit)">
+            <summary>
+            Returns the Open Weather Model.
+            </summary>
+            <param name="url">The URL</param>
+            <param name="unit">The unit</param>
+        </member>
+        <member name="T:APIAggregation.WebServiceRequests.ApiBaseResponse">
+            <summary>
+            The API Base Response Model
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.ApiBaseResponse.ErrorMessage">
+            <summary>
+            Denotes the error message returned by the web service method.
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.ApiBaseResponse.TraceId">
+            <summary>
+            Denotes the Trace Id that you get the error.
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.ApiBaseResponse.ErrorCode">
+            <summary>
+            Denotes the error code returned by the web service method.
+            </summary>
+        </member>
+        <member name="M:APIAggregation.WebServiceRequests.ApiBaseResponse.SignalFailure(APIAggregation.Helpers.Enum.ErrorCodes)">
+            <summary>
+            setup base response on failure
+            </summary>
+            <param name="errorCode"></param>
+        </member>
+        <member name="M:APIAggregation.WebServiceRequests.ApiBaseResponse.SignalFailure(APIAggregation.Helpers.Enum.ErrorCodes,System.String,System.String)">
+            <summary>
+            setup base response on failure
+            </summary>
+            <param name="errorCode">The input <see cref="T:APIAggregation.Helpers.Enum.ErrorCodes"/> code</param>
+            <param name="errorMessage">The optional message</param>
+        </member>
+        <member name="T:APIAggregation.WebServiceRequests.GetCityWeatherForecastResponse">
+            <summary>
+            The weather reasponse
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.GetCityWeatherForecastResponse.Coord">
+            <summary>
+            The coord of City
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.GetCityWeatherForecastResponse.Temeprature">
+            <summary>
+            The temperature information
+            </summary>
+        </member>
+        <member name="T:APIAggregation.WebServiceRequests.Temeprature">
+            <summary>
+            The temperature that API Returns
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Temeprature.Temp">
+            <summary>
+            The temperature that has.
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Temeprature.FeelsLike">
+            <summary>
+            How the temperature is feels like
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Temeprature.Min">
+            <summary>
+            Min Temperature
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Temeprature.Max">
+            <summary>
+            Max temperature
+            </summary>
+        </member>
+        <member name="T:APIAggregation.WebServiceRequests.Coord">
+            <summary>
+            The coord
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Coord.Longitude">
+            <summary>
+            The longitude of the area that you are looking
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Coord.Latitude">
+            <summary>
+            The latitudeof the area that you are looking
+            </summary>
+        </member>
+        <member name="T:APIAggregation.WebServiceRequests.GetJokeRequest">
+            <summary>
+            The Joke request Web Service Contract
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.GetJokeRequest.Categories">
+            <summary>
+            The categories ID that you want to search or filter
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.GetJokeRequest.Language">
+            <summary>
+            The Language that you want to search the Joke
+            </summary>
+        </member>
+        <member name="T:APIAggregation.WebServiceRequests.GetWeatherForecastLatitudeLongitudeRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.GetWeatherForecastLatitudeLongitudeRequest.City">
+            <summary>
+            The City
+            </summary>
+        </member>
+        <member name="T:APIAggregation.WebServiceRequests.Joke.JokeApi">
+            <summary>
+            Joke Response
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Joke.JokeApi.Category">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Joke.JokeApi.Type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Joke.JokeApi.Setup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Joke.JokeApi.Delivery">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Joke.JokeApi.Flags">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Joke.JokeApi.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Joke.JokeApi.Safe">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Joke.JokeApi.Lang">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:APIAggregation.WebServiceRequests.Joke.Flags">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Joke.Flags.Nsfw">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Joke.Flags.Religious">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Joke.Flags.Political">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Joke.Flags.Racist">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Joke.Flags.Sexist">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Joke.Flags.Explicit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:APIAggregation.WebServiceRequests.OpenWeatherMap.OpenWeatherMapResponse">
+            <summary>
+            The response that returns the Service of Open Weather
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.OpenWeatherMapResponse.Coord">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.OpenWeatherMapResponse.Weather">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.OpenWeatherMapResponse.Base">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.OpenWeatherMapResponse.Main">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.OpenWeatherMapResponse.Visibility">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.OpenWeatherMapResponse.Wind">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.OpenWeatherMapResponse.Rain">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.OpenWeatherMapResponse.Clouds">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.OpenWeatherMapResponse.Dt">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.OpenWeatherMapResponse.Sys">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.OpenWeatherMapResponse.Timezone">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.OpenWeatherMapResponse.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.OpenWeatherMapResponse.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.OpenWeatherMapResponse.Cod">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:APIAggregation.WebServiceRequests.OpenWeatherMap.Coord">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Coord.Lon">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Coord.Lat">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:APIAggregation.WebServiceRequests.OpenWeatherMap.Main">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Main.Temp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Main.Feels_like">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Main.Temp_min">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Main.Temp_max">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Main.Pressure">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Main.Humidity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Main.Sea_level">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Main.Grnd_level">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:APIAggregation.WebServiceRequests.OpenWeatherMap.Wind">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Wind.Speed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Wind.Deg">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Wind.Gust">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:APIAggregation.WebServiceRequests.OpenWeatherMap.Rain">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Rain._1h">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:APIAggregation.WebServiceRequests.OpenWeatherMap.Clouds">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Clouds.All">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:APIAggregation.WebServiceRequests.OpenWeatherMap.Sys">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Sys.Type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Sys.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Sys.Country">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Sys.Sunrise">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Sys.Sunset">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:APIAggregation.WebServiceRequests.OpenWeatherMap.Weather">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Weather.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Weather.Main">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Weather.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.OpenWeatherMap.Weather.Icon">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:APIAggregation.WebServiceRequests.WeatherForecastLatitudeLongtitudeRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.WeatherForecastLatitudeLongtitudeRequest.Latitude">
+            <summary>
+            The latitude that you want to search
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.WeatherForecastLatitudeLongtitudeRequest.Longitude">
+            <summary>
+            The longitude that you want to search
+            </summary>
+        </member>
+        <member name="T:APIAggregation.WebServiceRequests.WeatherForecastRequest">
+            <summary>
+            The weather forecast request Base
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.WeatherForecastRequest.Unit">
+            <summary>
+            The UNIT that you want to search
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.WeatherForecastRequest.Service">
+            <summary>
+            The Service of weather to search
+            </summary>
+        </member>
+        <member name="T:APIAggregation.WebServiceRequests.Sera.WeatherVisualResponse">
+            <summary>
+            The reponse of Weather Visual
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Sera.WeatherVisualResponse.latitude">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Sera.WeatherVisualResponse.longitude">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Sera.WeatherVisualResponse.currentConditions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Sera.WeatherVisualResponse.days">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:APIAggregation.WebServiceRequests.Sera.Currentconditions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Sera.Currentconditions.temp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Sera.Currentconditions.feelslike">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:APIAggregation.WebServiceRequests.Sera.Day">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Sera.Day.tempmax">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:APIAggregation.WebServiceRequests.Sera.Day.tempmin">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>
