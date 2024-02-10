@@ -67,12 +67,6 @@ namespace APIAggregation.Controllers
             // Iterate through each flag value
             foreach (T value in Enum.GetValues(typeof(T)))
             {
-                if (Convert.ToInt32(value) == 0)
-                {
-                    results.Add(value.ToString());
-                    return results;
-                }
-
                 if ((flags as Enum).HasFlag(value as Enum) && Convert.ToInt32(value) != 0)
                     results.Add(value.ToString());
             }
