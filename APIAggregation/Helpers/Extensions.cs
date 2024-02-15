@@ -117,7 +117,7 @@ namespace APIAggregation.Helpers
                     RequestUri = new Uri(uri)
                 };
 
-                using var client = httpClient.CreateClient(HttpClients.OpenWeather);
+                using var client = httpClient.CreateClient(httpClientName);
 
                 using var result = await client.SendAsync(req);
 
