@@ -36,11 +36,12 @@
             
             </summary>
         </member>
-        <member name="M:APIAggregation.Controllers.JokeController.#ctor(APIAggregation.Services.Joke.JokeService)">
+        <member name="M:APIAggregation.Controllers.JokeController.#ctor(APIAggregation.Services.Joke.JokeService,Microsoft.Extensions.Logging.ILogger{APIAggregation.Controllers.JokeController})">
             <summary>
             ctor
             </summary>
             <param name="jokeService"></param>
+            <param name="logger"></param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
         <member name="M:APIAggregation.Controllers.JokeController.GetJoke(APIAggregation.WebServiceRequests.GetJokeRequest)">
@@ -610,6 +611,7 @@
             </summary>
             <param name="errorCode">The input <see cref="T:APIAggregation.Helpers.Enum.ErrorCodes"/> code</param>
             <param name="errorMessage">The optional message</param>
+            <param name="traceId">The traceId of request</param>
         </member>
         <member name="T:APIAggregation.WebServiceRequests.GetCityWeatherForecastResponse">
             <summary>

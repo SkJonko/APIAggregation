@@ -1,5 +1,8 @@
 using APIAggregation;
 using APIAggregation.Helpers;
+using Microsoft.Extensions.Configuration;
+using Serilog;
+using Serilog.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +17,33 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.SwaggerGenerator();
+
+
+
+builder.Host.UseSerilog((hostBuilderContext, serviceProvider, loggerConfiguration) =>
+{
+    string appVersion = typeof(Program).Assembly.GetName().Version.ToString();
+
+
+    loggerConfiguration
+        .Enrich.FromLogContext()
+        .Enrich.WithMachineName()
+        .Enrich.WithEnvironmentName()
+        .Enrich.WithExceptionDetails()
+        .ReadFrom.Configuration(builder.Configuration)
+
+        //
+        // Custom properties
+        //
+        .Enrich.WithProperty(nameof(appVersion), appVersion)
+        .Enrich.WithProperty("ApplicationName", "ApiAggregation");
+
+    var SeqConnString = builder.Configuration.GetValue<string>("LoggingData:SerilogUrl");
+
+    if (SeqConnString is not null)
+        loggerConfiguration.WriteTo.Seq(SeqConnString);
+
+});
 
 builder.Services.AddServicesInDI(configurationSettings);
 

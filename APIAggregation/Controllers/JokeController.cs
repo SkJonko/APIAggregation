@@ -19,6 +19,7 @@ namespace APIAggregation.Controllers
         #region Privates
 
         private readonly JokeService _jokeService;
+        private readonly ILogger<JokeController> _logger;
 
         #endregion
 
@@ -26,10 +27,15 @@ namespace APIAggregation.Controllers
         /// ctor
         /// </summary>
         /// <param name="jokeService"></param>
+        /// <param name="logger"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public JokeController( JokeService jokeService)
+        public JokeController(JokeService jokeService, ILogger<JokeController> logger)
         {
-            _jokeService = jokeService ?? throw new ArgumentNullException(nameof(jokeService));
+            ArgumentNullException.ThrowIfNull(jokeService, nameof(jokeService));
+            _jokeService = jokeService;
+
+            ArgumentNullException.ThrowIfNull(logger, nameof(logger));
+            _logger = logger;
         }
 
         /// <summary>
@@ -43,6 +49,7 @@ namespace APIAggregation.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiBaseResponse))]
         public async Task<JokeApi> GetJoke([FromBody, Required] GetJokeRequest request)
         {
+            _logger.LogInformation("ENTER JokeController.GetJoke {@Request}", request);
             return await _jokeService.GetJoke(GetStringValueFromFlags(request.Categories), request.Language);
         }
 
