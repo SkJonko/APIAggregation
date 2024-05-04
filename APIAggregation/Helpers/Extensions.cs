@@ -7,6 +7,8 @@ using Newtonsoft.Json;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using APIAggregation.Services.Joke;
+using Polly.CircuitBreaker;
+using Polly;
 
 namespace APIAggregation.Helpers
 {
@@ -61,9 +63,9 @@ namespace APIAggregation.Helpers
 
             services.AddScoped<JokeService>();
 
-            services.AddHttpClient(HttpClients.OpenWeather);
-            services.AddHttpClient(HttpClients.WeatherVisual);
-            services.AddHttpClient(HttpClients.JokeApi);
+            services.AddHttpClient(HttpClients.OpenWeather).AddTransientHttpErrorPolicy_AdvancedCircuitBreaker();
+            services.AddHttpClient(HttpClients.WeatherVisual).AddTransientHttpErrorPolicy_AdvancedCircuitBreaker();
+            services.AddHttpClient(HttpClients.JokeApi).AddTransientHttpErrorPolicy_AdvancedCircuitBreaker();
 
             services.AddMemoryCache();
 
@@ -117,22 +119,36 @@ namespace APIAggregation.Helpers
                     RequestUri = new Uri(uri)
                 };
 
-                using var client = httpClient.CreateClient(httpClientName);
+                using (var client = httpClient.CreateClient(httpClientName))
+                {
+                    using (var result = await client.SendAsync(req))
+                    {
+                        var stringResponse = await result.Content.ReadAsStringAsync();
 
-                using var result = await client.SendAsync(req);
-
-                var stringResponse = await result.Content.ReadAsStringAsync();
-
-                if (result.IsSuccessStatusCode)
-                    return stringResponse;
-                else
-                    throw new Exception($"{result.StatusCode} {stringResponse}");
+                        if (result.IsSuccessStatusCode)
+                            return stringResponse;
+                        else
+                            throw new Exception($"{result.StatusCode} {stringResponse}");
+                    }
+                }
+            }
+            catch (BrokenCircuitException brokerCircuitException)
+            {
+                throw new Exception("Service Unavailable cause Broker Circuit Exception is Open", brokerCircuitException);
             }
             catch (Exception)
             {
                 throw;
             }
         }
+
+        /// <summary>
+        /// Method to add advanced Circuit Breaker Policy in our 
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        private static IHttpClientBuilder AddTransientHttpErrorPolicy_AdvancedCircuitBreaker(this IHttpClientBuilder builder)
+            => builder.AddTransientHttpErrorPolicy(policy => policy.AdvancedCircuitBreakerAsync(0.25, TimeSpan.FromSeconds(30), 5, TimeSpan.FromSeconds(30)));
         
         #endregion HttpClientFactory
 

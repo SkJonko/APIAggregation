@@ -61,7 +61,7 @@ namespace APIAggregation.Services.Joke
         /// <param name="language">The language that you want to retrieve the information</param>
         /// <returns></returns>
         public async Task<JokeApi?> GetJoke(List<string> categories, Languages language) =>
-            await _cache.GetOrCreateAsync($"{categories}{language}{appEndpoint.Code}", async entry =>
+            await _cache.GetOrCreateAsync($"{string.Join(",", categories)}{language}{appEndpoint.Code}", async entry =>
             {
                 entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(appEndpoint.Cache);
                 return await _httpClientFactory.ExecuteRequest<JokeApi>(HttpMethod.Get, $"{appEndpoint.BaseAddress}{string.Join(",", categories)}?lang={language}&type=twopart", HttpClients.JokeApi);
