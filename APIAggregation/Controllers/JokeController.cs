@@ -42,15 +42,15 @@ namespace APIAggregation.Controllers
         /// Returns a Joke 
         /// </summary>
         /// <param name="request"></param>
-        /// <returns></returns>
+        /// <param name="cancellationToken"></param>
+        /// <returns>The cancellation token</returns>
         [HttpPost]
         [Route("GetJoke")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(JokeApi))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiBaseResponse))]
-        public async Task<JokeApi> GetJoke([FromBody, Required] GetJokeRequest request)
+        public async Task<JokeApi> GetJoke([FromBody, Required] GetJokeRequest request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("ENTER JokeController.GetJoke {@Request}", request);
-            return await _jokeService.GetJoke(GetStringValueFromFlags(request.Categories), request.Language);
+            return await _jokeService.GetJoke(GetStringValueFromFlags(request.Categories), request.Language, cancellationToken);
         }
 
 

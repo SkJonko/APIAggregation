@@ -71,12 +71,13 @@ namespace APIAggregation.Services.Weather
         /// </summary>
         /// <param name="city">The city name that you want to search</param>
         /// <param name="unit">The unit</param>
+        /// <param name="cancellationToken">The cancellation Token.</param>
         /// <returns>The model of weather that returns if the city exists. Response is cached for X minutes refer appsettings</returns>
-        public async Task<GetCityWeatherForecastResponse?> RetrieveWeather(string city, WeatherUnit unit) =>
+        public async Task<GetCityWeatherForecastResponse?> RetrieveWeather(string city, WeatherUnit unit, CancellationToken cancellationToken = default) =>
             await _cache.GetOrCreateAsync($"{city}{unit}{appEndpoint.Code}", async entry =>
             {
                 entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(appEndpoint.Cache);
-                return await GetWeather($"weather?q={city}", unit);
+                return await GetWeather($"weather?q={city}", unit, cancellationToken);
             });
 
 
@@ -86,12 +87,16 @@ namespace APIAggregation.Services.Weather
         /// <param name="lat">The latitude that you want to search</param>
         /// <param name="lon">The longitude that you want to search</param>
         /// <param name="unit">The unit</param>
+        /// <param name="cancellationToken">The cancellation Token.</param>
         /// <returns>The model of weather that returns if the cthis long and lat exists. Response is cached for X minutes refer appsettings</returns>
-        public async Task<GetCityWeatherForecastResponse?> RetrieveWeather(double lat, double lon, WeatherUnit unit) =>
+        public async Task<GetCityWeatherForecastResponse?> RetrieveWeather(double lat, double lon, WeatherUnit unit, CancellationToken cancellationToken = default) =>
             await _cache.GetOrCreateAsync($"{lat}{lon}{unit}{appEndpoint.Code}", async entry =>
             {
                 entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(appEndpoint.Cache);
-                return await GetWeather($"weather?lat={lat}&lon={lon}", unit);
+                return await GetWeather(
+                    $"weather?lat={lat}&lon={lon}", 
+                    unit, 
+                    cancellationToken: cancellationToken);
             });
 
 
@@ -102,11 +107,17 @@ namespace APIAggregation.Services.Weather
         /// </summary>
         /// <param name="url">The URL</param>
         /// <param name="unit">The unit</param>
+        /// <param name="cancellationToken">The cancellation Token.</param>
         /// <returns></returns>
-        private async Task<GetCityWeatherForecastResponse?> GetWeather(string url, WeatherUnit unit)
+        private async Task<GetCityWeatherForecastResponse?> GetWeather(string url, WeatherUnit unit, CancellationToken cancellationToken = default)
         {
             var unitMetric = unit == WeatherUnit.C ? "metric" : "imperial";
-            return (await _httpClientFactory.ExecuteRequest<OpenWeatherMapResponse>(HttpMethod.Get, $"{appEndpoint.BaseAddress}{url}&units={unitMetric}&appid={appEndpoint.AppKey}", HttpClients.OpenWeather))!.ToWeatherResponseModel();
+            return (await _httpClientFactory.ExecuteRequest<OpenWeatherMapResponse>(
+                HttpMethod.Get, 
+                $"{appEndpoint.BaseAddress}{url}&units={unitMetric}&appid={appEndpoint.AppKey}", 
+                HttpClients.OpenWeather,
+                cancellationToken: cancellationToken)
+                )!.ToWeatherResponseModel();
         }
 
         #endregion

@@ -59,12 +59,13 @@ namespace APIAggregation.Services.Joke
         /// </summary>
         /// <param name="categories">The categories that you want to search for</param>
         /// <param name="language">The language that you want to retrieve the information</param>
+        /// <param name="cancellationToken">The Cancellation Token</param>
         /// <returns></returns>
-        public async Task<JokeApi?> GetJoke(List<string> categories, Languages language) =>
+        public async Task<JokeApi?> GetJoke(List<string> categories, Languages language, CancellationToken cancellationToken = default) =>
             await _cache.GetOrCreateAsync($"{string.Join(",", categories)}{language}{appEndpoint.Code}", async entry =>
             {
                 entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(appEndpoint.Cache);
-                return await _httpClientFactory.ExecuteRequest<JokeApi>(HttpMethod.Get, $"{appEndpoint.BaseAddress}{string.Join(",", categories)}?lang={language}&type=twopart", HttpClients.JokeApi);
+                return await _httpClientFactory.ExecuteRequest<JokeApi>(HttpMethod.Get, $"{appEndpoint.BaseAddress}{string.Join(",", categories)}?lang={language}&type=twopart", HttpClients.JokeApi, cancellationToken: cancellationToken);
             });
     }
 }

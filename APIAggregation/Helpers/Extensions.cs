@@ -83,9 +83,10 @@ namespace APIAggregation.Helpers
         /// <param name="uri">The URI</param>
         /// <param name="httpClientName">The HTTP Client Name</param>
         /// <param name="request">The request if exists</param>
+        /// <param name="cancellationToken">Cancellation Token</param>
         /// <returns></returns>
-        public static async Task<string> ExecuteRequest(this IHttpClientFactory httpClient, HttpMethod httpMethod, string uri, string httpClientName, StringContent? request = null)
-            => await httpClient.ExecuteRequestPrivate(httpMethod, uri, httpClientName, request);
+        public static async Task<string> ExecuteRequest(this IHttpClientFactory httpClient, HttpMethod httpMethod, string uri, string httpClientName, StringContent? request = null, CancellationToken cancellationToken = default)
+            => await httpClient.ExecuteRequestPrivate(httpMethod, uri, httpClientName, request, cancellationToken);
 
         /// <summary>
         /// Execute request and returns you the model T
@@ -95,9 +96,10 @@ namespace APIAggregation.Helpers
         /// <param name="uri">The URI</param>
         /// <param name="httpClientName">The HTTP Client Name</param>
         /// <param name="request">The request if exists</param>
+        /// <param name="cancellationToken">Cancellation Token</param>
         /// <returns></returns>
-        public static async Task<T?> ExecuteRequest<T>(this IHttpClientFactory httpClient, HttpMethod httpMethod, string uri, string httpClientName, StringContent? request = null)
-            => JsonConvert.DeserializeObject<T?>(await httpClient.ExecuteRequestPrivate(httpMethod, uri, httpClientName, request));
+        public static async Task<T?> ExecuteRequest<T>(this IHttpClientFactory httpClient, HttpMethod httpMethod, string uri, string httpClientName, StringContent? request = null, CancellationToken cancellationToken = default)
+            => JsonConvert.DeserializeObject<T?>(await httpClient.ExecuteRequestPrivate(httpMethod, uri, httpClientName, request, cancellationToken));
 
         /// <summary>
         /// The private Method to do the HTTP Call.
@@ -107,8 +109,9 @@ namespace APIAggregation.Helpers
         /// <param name="uri"></param>
         /// <param name="httpClientName"></param>
         /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private static async Task<string> ExecuteRequestPrivate(this IHttpClientFactory httpClient, HttpMethod httpMethod, string uri, string httpClientName, StringContent? request = null)
+        private static async Task<string> ExecuteRequestPrivate(this IHttpClientFactory httpClient, HttpMethod httpMethod, string uri, string httpClientName, StringContent? request = null, CancellationToken cancellationToken = default)
         {
             try
             {
@@ -121,9 +124,9 @@ namespace APIAggregation.Helpers
 
                 using (var client = httpClient.CreateClient(httpClientName))
                 {
-                    using (var result = await client.SendAsync(req))
+                    using (var result = await client.SendAsync(req, cancellationToken))
                     {
-                        var stringResponse = await result.Content.ReadAsStringAsync();
+                        var stringResponse = await result.Content.ReadAsStringAsync(cancellationToken);
 
                         if (result.IsSuccessStatusCode)
                             return stringResponse;
@@ -131,6 +134,10 @@ namespace APIAggregation.Helpers
                             throw new Exception($"{result.StatusCode} {stringResponse}");
                     }
                 }
+            }
+            catch (TaskCanceledException taskException)
+            {
+                throw new Exception("Operation was cancelled from user", taskException);
             }
             catch (BrokenCircuitException brokerCircuitException)
             {

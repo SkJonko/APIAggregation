@@ -36,34 +36,36 @@ namespace APIAggregation.Controllers
         /// The Weather that has when you search for city
         /// </summary>
         /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         /// <exception cref="Exception">Application Exception of Endpoint</exception>
         [HttpGet]
         [Route("CityWeather")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetCityWeatherForecastResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiBaseResponse))]
-        public async Task<GetCityWeatherForecastResponse> GetCityWeather([FromQuery, Required] GetWeatherForecastLatitudeLongitudeRequest request)
+        public async Task<GetCityWeatherForecastResponse> GetCityWeather([FromQuery, Required] GetWeatherForecastLatitudeLongitudeRequest request, CancellationToken cancellationToken)
         {
             var weatherService = _weatherServices.FirstOrDefault(x => x.WeatherServiceId == request.Service) ?? throw new Exception("Invalid Weather ID");
 
-            return await weatherService.RetrieveWeather(request.City, request.Unit);
+            return await weatherService.RetrieveWeather(request.City, request.Unit, cancellationToken);
         }
 
         /// <summary>
         /// The Weather that has when you search for latitude and longitude
         /// </summary>
         /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         /// <exception cref="Exception">Application Exception of Endpoint</exception>
         [HttpGet]
         [Route("LatitudeLongitudeWeather")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetCityWeatherForecastResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiBaseResponse))]
-        public async Task<GetCityWeatherForecastResponse> GetWeatherForecastLatitudeLongitude([FromQuery] WeatherForecastLatitudeLongtitudeRequest request)
+        public async Task<GetCityWeatherForecastResponse> GetWeatherForecastLatitudeLongitude([FromQuery] WeatherForecastLatitudeLongtitudeRequest request, CancellationToken cancellationToken)
         {
             var weatherService = _weatherServices.FirstOrDefault(x => x.WeatherServiceId == request.Service) ?? throw new Exception("Invalid Weather ID");
 
-            return await weatherService.RetrieveWeather(request.Latitude, request.Longitude, request.Unit);
+            return await weatherService.RetrieveWeather(request.Latitude, request.Longitude, request.Unit, cancellationToken);
         }
     }
 }

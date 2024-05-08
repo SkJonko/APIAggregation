@@ -43,6 +43,7 @@ builder.Host.UseSerilog((hostBuilderContext, serviceProvider, loggerConfiguratio
     if (SeqConnString is not null)
         loggerConfiguration.WriteTo.Seq(SeqConnString);
 
+    loggerConfiguration.WriteTo.Console();
 });
 
 builder.Services.AddServicesInDI(configurationSettings);

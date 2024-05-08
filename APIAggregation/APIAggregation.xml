@@ -44,12 +44,13 @@
             <param name="logger"></param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:APIAggregation.Controllers.JokeController.GetJoke(APIAggregation.WebServiceRequests.GetJokeRequest)">
+        <member name="M:APIAggregation.Controllers.JokeController.GetJoke(APIAggregation.WebServiceRequests.GetJokeRequest,System.Threading.CancellationToken)">
             <summary>
             Returns a Joke 
             </summary>
             <param name="request"></param>
-            <returns></returns>
+            <param name="cancellationToken"></param>
+            <returns>The cancellation token</returns>
         </member>
         <member name="M:APIAggregation.Controllers.JokeController.GetStringValueFromFlags``1(``0)">
             <summary>
@@ -71,15 +72,16 @@
             <param name="weatherServices"></param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:APIAggregation.Controllers.WeatherForecastController.GetCityWeather(APIAggregation.WebServiceRequests.GetWeatherForecastLatitudeLongitudeRequest)">
+        <member name="M:APIAggregation.Controllers.WeatherForecastController.GetCityWeather(APIAggregation.WebServiceRequests.GetWeatherForecastLatitudeLongitudeRequest,System.Threading.CancellationToken)">
             <summary>
             The Weather that has when you search for city
             </summary>
             <param name="request"></param>
+            <param name="cancellationToken"></param>
             <returns></returns>
             <exception cref="T:System.Exception">Application Exception of Endpoint</exception>
         </member>
-        <member name="M:APIAggregation.Controllers.WeatherForecastController.GetWeatherForecastLatitudeLongitude(APIAggregation.WebServiceRequests.WeatherForecastLatitudeLongtitudeRequest)">
+        <member name="M:APIAggregation.Controllers.WeatherForecastController.GetWeatherForecastLatitudeLongitude(APIAggregation.WebServiceRequests.WeatherForecastLatitudeLongtitudeRequest,System.Threading.CancellationToken)">
             <summary>
             The Weather that has when you search for latitude and longitude
             </summary>
@@ -237,7 +239,7 @@
             <param name="configurationSettings"></param>
             <returns></returns>
         </member>
-        <member name="M:APIAggregation.Helpers.Extensions.ExecuteRequest(System.Net.Http.IHttpClientFactory,System.Net.Http.HttpMethod,System.String,System.String,System.Net.Http.StringContent)">
+        <member name="M:APIAggregation.Helpers.Extensions.ExecuteRequest(System.Net.Http.IHttpClientFactory,System.Net.Http.HttpMethod,System.String,System.String,System.Net.Http.StringContent,System.Threading.CancellationToken)">
             <summary>
             Execute request and returns you string
             </summary>
@@ -246,9 +248,10 @@
             <param name="uri">The URI</param>
             <param name="httpClientName">The HTTP Client Name</param>
             <param name="request">The request if exists</param>
+            <param name="cancellationToken">Cancellation Token</param>
             <returns></returns>
         </member>
-        <member name="M:APIAggregation.Helpers.Extensions.ExecuteRequest``1(System.Net.Http.IHttpClientFactory,System.Net.Http.HttpMethod,System.String,System.String,System.Net.Http.StringContent)">
+        <member name="M:APIAggregation.Helpers.Extensions.ExecuteRequest``1(System.Net.Http.IHttpClientFactory,System.Net.Http.HttpMethod,System.String,System.String,System.Net.Http.StringContent,System.Threading.CancellationToken)">
             <summary>
             Execute request and returns you the model T
             </summary>
@@ -257,9 +260,10 @@
             <param name="uri">The URI</param>
             <param name="httpClientName">The HTTP Client Name</param>
             <param name="request">The request if exists</param>
+            <param name="cancellationToken">Cancellation Token</param>
             <returns></returns>
         </member>
-        <member name="M:APIAggregation.Helpers.Extensions.ExecuteRequestPrivate(System.Net.Http.IHttpClientFactory,System.Net.Http.HttpMethod,System.String,System.String,System.Net.Http.StringContent)">
+        <member name="M:APIAggregation.Helpers.Extensions.ExecuteRequestPrivate(System.Net.Http.IHttpClientFactory,System.Net.Http.HttpMethod,System.String,System.String,System.Net.Http.StringContent,System.Threading.CancellationToken)">
             <summary>
             The private Method to do the HTTP Call.
             </summary>
@@ -268,6 +272,7 @@
             <param name="uri"></param>
             <param name="httpClientName"></param>
             <param name="request"></param>
+            <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="M:APIAggregation.Helpers.Extensions.AddTransientHttpErrorPolicy_AdvancedCircuitBreaker(Microsoft.Extensions.DependencyInjection.IHttpClientBuilder)">
@@ -421,12 +426,13 @@
             <param name="configurationSettings"></param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:APIAggregation.Services.Joke.JokeService.GetJoke(System.Collections.Generic.List{System.String},APIAggregation.Helpers.Enum.Languages)">
+        <member name="M:APIAggregation.Services.Joke.JokeService.GetJoke(System.Collections.Generic.List{System.String},APIAggregation.Helpers.Enum.Languages,System.Threading.CancellationToken)">
             <summary>
             Method to return Joke based on the language and the categories
             </summary>
             <param name="categories">The categories that you want to search for</param>
             <param name="language">The language that you want to retrieve the information</param>
+            <param name="cancellationToken">The Cancellation Token</param>
             <returns></returns>
         </member>
         <member name="T:APIAggregation.Services.Weather.IWeatherServices">
@@ -439,7 +445,7 @@
             The Weather Service ID
             </summary>
         </member>
-        <member name="M:APIAggregation.Services.Weather.IWeatherServices.RetrieveWeather(System.String,APIAggregation.Helpers.Enum.WeatherUnit)">
+        <member name="M:APIAggregation.Services.Weather.IWeatherServices.RetrieveWeather(System.String,APIAggregation.Helpers.Enum.WeatherUnit,System.Threading.CancellationToken)">
             <summary>
             Retrieve weather from City.
             </summary>
@@ -447,7 +453,7 @@
             <param name="unit">The unit</param>
             <returns>The model of weather that returns if the city exists. Response is cached for X minutes refer appsettings</returns>
         </member>
-        <member name="M:APIAggregation.Services.Weather.IWeatherServices.RetrieveWeather(System.Double,System.Double,APIAggregation.Helpers.Enum.WeatherUnit)">
+        <member name="M:APIAggregation.Services.Weather.IWeatherServices.RetrieveWeather(System.Double,System.Double,APIAggregation.Helpers.Enum.WeatherUnit,System.Threading.CancellationToken)">
             <summary>
             Retrieve Weather from latitude and longitude
             </summary>
@@ -497,29 +503,32 @@
             <param name="configurationSettings"></param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:APIAggregation.Services.Weather.OpenWeatherMapService.RetrieveWeather(System.String,APIAggregation.Helpers.Enum.WeatherUnit)">
+        <member name="M:APIAggregation.Services.Weather.OpenWeatherMapService.RetrieveWeather(System.String,APIAggregation.Helpers.Enum.WeatherUnit,System.Threading.CancellationToken)">
             <summary>
             Retrieve weather from City.
             </summary>
             <param name="city">The city name that you want to search</param>
             <param name="unit">The unit</param>
+            <param name="cancellationToken">The cancellation Token.</param>
             <returns>The model of weather that returns if the city exists. Response is cached for X minutes refer appsettings</returns>
         </member>
-        <member name="M:APIAggregation.Services.Weather.OpenWeatherMapService.RetrieveWeather(System.Double,System.Double,APIAggregation.Helpers.Enum.WeatherUnit)">
+        <member name="M:APIAggregation.Services.Weather.OpenWeatherMapService.RetrieveWeather(System.Double,System.Double,APIAggregation.Helpers.Enum.WeatherUnit,System.Threading.CancellationToken)">
             <summary>
             Retrieve Weather from latitude and longitude
             </summary>
             <param name="lat">The latitude that you want to search</param>
             <param name="lon">The longitude that you want to search</param>
             <param name="unit">The unit</param>
+            <param name="cancellationToken">The cancellation Token.</param>
             <returns>The model of weather that returns if the cthis long and lat exists. Response is cached for X minutes refer appsettings</returns>
         </member>
-        <member name="M:APIAggregation.Services.Weather.OpenWeatherMapService.GetWeather(System.String,APIAggregation.Helpers.Enum.WeatherUnit)">
+        <member name="M:APIAggregation.Services.Weather.OpenWeatherMapService.GetWeather(System.String,APIAggregation.Helpers.Enum.WeatherUnit,System.Threading.CancellationToken)">
             <summary>
             Returns the Open Weather Model.
             </summary>
             <param name="url">The URL</param>
             <param name="unit">The unit</param>
+            <param name="cancellationToken">The cancellation Token.</param>
             <returns></returns>
         </member>
         <member name="T:APIAggregation.Services.Weather.WeatherVisualCrossingService">
@@ -561,29 +570,32 @@
             <param name="cache"></param>
             <param name="configurationSettings"></param>
         </member>
-        <member name="M:APIAggregation.Services.Weather.WeatherVisualCrossingService.RetrieveWeather(System.String,APIAggregation.Helpers.Enum.WeatherUnit)">
+        <member name="M:APIAggregation.Services.Weather.WeatherVisualCrossingService.RetrieveWeather(System.String,APIAggregation.Helpers.Enum.WeatherUnit,System.Threading.CancellationToken)">
             <summary>
             Retrieve weather from City.
             </summary>
             <param name="city">The city name that you want to search</param>
             <param name="unit">The unit</param>
+            <param name="cancellationToken">The cancellation Token.</param>
             <returns>The model of weather that returns if the city exists. Response is cached for X minutes refer appsettings</returns>
         </member>
-        <member name="M:APIAggregation.Services.Weather.WeatherVisualCrossingService.RetrieveWeather(System.Double,System.Double,APIAggregation.Helpers.Enum.WeatherUnit)">
+        <member name="M:APIAggregation.Services.Weather.WeatherVisualCrossingService.RetrieveWeather(System.Double,System.Double,APIAggregation.Helpers.Enum.WeatherUnit,System.Threading.CancellationToken)">
             <summary>
             Retrieve Weather from latitude and longitude
             </summary>
             <param name="lat">The latitude that you want to search</param>
             <param name="lon">The longitude that you want to search</param>
             <param name="unit">The unit</param>
+            <param name="cancellationToken">The cancellation Token.</param>
             <returns>The model of weather that returns if the cthis long and lat exists. Response is cached for X minutes refer appsettings</returns>
         </member>
-        <member name="M:APIAggregation.Services.Weather.WeatherVisualCrossingService.GetWeather(System.String,APIAggregation.Helpers.Enum.WeatherUnit)">
+        <member name="M:APIAggregation.Services.Weather.WeatherVisualCrossingService.GetWeather(System.String,APIAggregation.Helpers.Enum.WeatherUnit,System.Threading.CancellationToken)">
             <summary>
             Returns the Open Weather Model.
             </summary>
             <param name="url">The URL</param>
             <param name="unit">The unit</param>
+            <param name="cancellationToken"></param>
         </member>
         <member name="T:APIAggregation.WebServiceRequests.ApiBaseResponse">
             <summary>
