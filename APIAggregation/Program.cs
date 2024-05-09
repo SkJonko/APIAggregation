@@ -3,6 +3,9 @@ using APIAggregation.Helpers;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Exceptions;
+using Serilog.Sinks.OpenTelemetry;
+using System.Net.Sockets;
+using System.Xml.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,8 +38,10 @@ builder.Host.UseSerilog((hostBuilderContext, serviceProvider, loggerConfiguratio
         //
         // Custom properties
         //
-        .Enrich.WithProperty(nameof(appVersion), appVersion)
+        .Enrich.WithProperty("AppVersion", appVersion)
         .Enrich.WithProperty("ApplicationName", "ApiAggregation");
+
+
 
     var SeqConnString = builder.Configuration.GetValue<string>("LoggingData:SerilogUrl");
 
@@ -44,6 +49,26 @@ builder.Host.UseSerilog((hostBuilderContext, serviceProvider, loggerConfiguratio
         loggerConfiguration.WriteTo.Seq(SeqConnString);
 
     loggerConfiguration.WriteTo.Console();
+
+
+    //
+    // Run this to create the docker Aspire.
+    // docker run --rm - it - p 18888:18888 - p 4317:18889 - d--name aspire-dashboard mcr.microsoft.com / dotnet / nightly / aspire - dashboard:8.0.0 - preview.6
+    //
+    var aspireUrl = builder.Configuration.GetValue<string>("LoggingData:AspireUrl");
+
+    if (aspireUrl is not null)
+        loggerConfiguration.WriteTo.OpenTelemetry(options =>
+        {
+            options.Endpoint = aspireUrl;
+            options.ResourceAttributes = new Dictionary<string, object>
+            {
+                ["service.name"] = "ApiAggregation"
+            };
+            options.IncludedData = IncludedData.MessageTemplateRenderingsAttribute |
+                                  IncludedData.TraceIdField | IncludedData.SpanIdField |
+                                  IncludedData.MessageTemplateTextAttribute | IncludedData.SourceContextAttribute;
+        });
 });
 
 builder.Services.AddServicesInDI(configurationSettings);
