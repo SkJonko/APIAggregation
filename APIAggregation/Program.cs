@@ -25,7 +25,7 @@ builder.Services.SwaggerGenerator();
 
 builder.Host.UseSerilog((hostBuilderContext, serviceProvider, loggerConfiguration) =>
 {
-    string appVersion = typeof(Program).Assembly.GetName().Version.ToString();
+    string appVersion = typeof(Program).Assembly.GetName().Version!.ToString();
 
 
     loggerConfiguration
@@ -53,7 +53,7 @@ builder.Host.UseSerilog((hostBuilderContext, serviceProvider, loggerConfiguratio
 
     //
     // Run this to create the docker Aspire.
-    // docker run --rm - it - p 18888:18888 - p 4317:18889 - d--name aspire-dashboard mcr.microsoft.com / dotnet / nightly / aspire - dashboard:8.0.0 - preview.6
+    // docker run --rm -it -p 18888:18888 -p 4317:18889 -d --name aspire-dashboard mcr.microsoft.com/dotnet/nightly/aspire-dashboard:8.0.0-preview.6
     //
     var aspireUrl = builder.Configuration.GetValue<string>("LoggingData:AspireUrl");
 

@@ -72,7 +72,7 @@ namespace APIAggregation.Helpers
             errorMessageObject.SignalFailure(ErrorCodes.SystemError, ex.Message, context?.TraceIdentifier);
 
             var errorMessage = JsonConvert.SerializeObject(errorMessageObject);
-            context.Response.ContentType = "application/json";
+            context!.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.NotFound;
 
             return context.Response.WriteAsync(errorMessage);
