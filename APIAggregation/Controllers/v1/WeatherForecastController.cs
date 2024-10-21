@@ -1,16 +1,18 @@
 using APIAggregation.Services.Weather;
 using APIAggregation.WebServiceRequests;
+using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using System.ComponentModel.DataAnnotations;
 
-namespace APIAggregation.Controllers
+namespace APIAggregation.Controllers.v1
 {
     /// <summary>
-    /// 
+    /// Version v1.0
     /// </summary>
+    [ApiVersion("1.0")]
     [ApiController]
     [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class WeatherForecastController : ControllerBase
     {
 
@@ -40,6 +42,7 @@ namespace APIAggregation.Controllers
         /// <returns></returns>
         /// <exception cref="Exception">Application Exception of Endpoint</exception>
         [HttpGet]
+        [MapToApiVersion("1.0")]
         [Route("CityWeather")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetCityWeatherForecastResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiBaseResponse))]
@@ -58,6 +61,7 @@ namespace APIAggregation.Controllers
         /// <returns></returns>
         /// <exception cref="Exception">Application Exception of Endpoint</exception>
         [HttpGet]
+        [MapToApiVersion("1.0")]
         [Route("LatitudeLongitudeWeather")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetCityWeatherForecastResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiBaseResponse))]

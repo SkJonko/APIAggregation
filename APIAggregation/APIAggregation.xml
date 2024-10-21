@@ -60,19 +60,19 @@
             <param name="flags">The enum Flags</param>
             <returns></returns>
         </member>
-        <member name="T:APIAggregation.Controllers.WeatherForecastController">
+        <member name="T:APIAggregation.Controllers.v1.WeatherForecastController">
             <summary>
             
             </summary>
         </member>
-        <member name="M:APIAggregation.Controllers.WeatherForecastController.#ctor(System.Collections.Generic.IEnumerable{APIAggregation.Services.Weather.IWeatherServices})">
+        <member name="M:APIAggregation.Controllers.v1.WeatherForecastController.#ctor(System.Collections.Generic.IEnumerable{APIAggregation.Services.Weather.IWeatherServices})">
             <summary>
             ctor
             </summary>
             <param name="weatherServices"></param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:APIAggregation.Controllers.WeatherForecastController.GetCityWeather(APIAggregation.WebServiceRequests.GetWeatherForecastLatitudeLongitudeRequest,System.Threading.CancellationToken)">
+        <member name="M:APIAggregation.Controllers.v1.WeatherForecastController.GetCityWeather(APIAggregation.WebServiceRequests.GetWeatherForecastLatitudeLongitudeRequest,System.Threading.CancellationToken)">
             <summary>
             The Weather that has when you search for city
             </summary>
@@ -81,7 +81,32 @@
             <returns></returns>
             <exception cref="T:System.Exception">Application Exception of Endpoint</exception>
         </member>
-        <member name="M:APIAggregation.Controllers.WeatherForecastController.GetWeatherForecastLatitudeLongitude(APIAggregation.WebServiceRequests.WeatherForecastLatitudeLongtitudeRequest,System.Threading.CancellationToken)">
+        <member name="M:APIAggregation.Controllers.v1.WeatherForecastController.GetWeatherForecastLatitudeLongitude(APIAggregation.WebServiceRequests.WeatherForecastLatitudeLongtitudeRequest,System.Threading.CancellationToken)">
+            <summary>
+            The Weather that has when you search for latitude and longitude
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+            <exception cref="T:System.Exception">Application Exception of Endpoint</exception>
+        </member>
+        <member name="M:APIAggregation.Controllers.v2.WeatherForecastController.#ctor(System.Collections.Generic.IEnumerable{APIAggregation.Services.Weather.IWeatherServices})">
+            <summary>
+            ctor
+            </summary>
+            <param name="weatherServices"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:APIAggregation.Controllers.v2.WeatherForecastController.GetCityWeatherV2(APIAggregation.WebServiceRequests.GetWeatherForecastLatitudeLongitudeRequest,System.Threading.CancellationToken)">
+            <summary>
+            The Weather that has when you search for city
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+            <exception cref="T:System.Exception">Application Exception of Endpoint</exception>
+        </member>
+        <member name="M:APIAggregation.Controllers.v2.WeatherForecastController.GetWeatherForecastLatitudeLongitudeV2(APIAggregation.WebServiceRequests.WeatherForecastLatitudeLongtitudeRequest,System.Threading.CancellationToken)">
             <summary>
             The Weather that has when you search for latitude and longitude
             </summary>
@@ -238,6 +263,13 @@
             </summary>
             <param name="services"></param>
             <param name="configurationSettings"></param>
+            <returns></returns>
+        </member>
+        <member name="M:APIAggregation.Helpers.Extensions.ConfigureDocumentationUI(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Collections.Generic.IReadOnlyList{Asp.Versioning.ApiExplorer.ApiVersionDescription})">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
             <returns></returns>
         </member>
         <member name="M:APIAggregation.Helpers.Extensions.ExecuteRequest(System.Net.Http.IHttpClientFactory,System.Net.Http.HttpMethod,System.String,System.String,System.Net.Http.StringContent,System.Threading.CancellationToken)">
@@ -599,6 +631,49 @@
             <param name="url">The URL</param>
             <param name="unit">The unit</param>
             <param name="cancellationToken"></param>
+        </member>
+        <member name="T:APIAggregation.Swagger.ConfigureSwaggerOptions">
+            <summary>
+            Configure Swagger Options for versioning.
+            </summary>
+            <remarks>
+            ctor
+            </remarks>
+            <param name="provider"></param>
+        </member>
+        <member name="M:APIAggregation.Swagger.ConfigureSwaggerOptions.#ctor(Asp.Versioning.ApiExplorer.IApiVersionDescriptionProvider)">
+            <summary>
+            Configure Swagger Options for versioning.
+            </summary>
+            <remarks>
+            ctor
+            </remarks>
+            <param name="provider"></param>
+        </member>
+        <member name="M:APIAggregation.Swagger.ConfigureSwaggerOptions.Configure(Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions)">
+            <summary>
+            Configure
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:APIAggregation.Swagger.ConfigureSwaggerOptions.CreateInfoForApiVersion(Asp.Versioning.ApiExplorer.ApiVersionDescription)">
+            <summary>
+            Description and versioning of controllers
+            </summary>
+            <param name="description"></param>
+            <returns></returns>
+        </member>
+        <member name="T:APIAggregation.Swagger.SwaggerDefaultValues">
+            <summary>
+            Operation Filter for Swagger
+            </summary>
+        </member>
+        <member name="M:APIAggregation.Swagger.SwaggerDefaultValues.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            The Apply Mehtyod
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
         </member>
         <member name="T:APIAggregation.WebServiceRequests.ApiBaseResponse">
             <summary>

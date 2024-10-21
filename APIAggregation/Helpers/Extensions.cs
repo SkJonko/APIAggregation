@@ -9,6 +9,11 @@ using System.Reflection;
 using APIAggregation.Services.Joke;
 using Polly.CircuitBreaker;
 using Polly;
+using Asp.Versioning;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using APIAggregation.Swagger;
+using System.Collections.Generic;
+using Asp.Versioning.ApiExplorer;
 
 namespace APIAggregation.Helpers
 {
@@ -25,24 +30,11 @@ namespace APIAggregation.Helpers
         /// <returns></returns>
         public static IServiceCollection SwaggerGenerator(this IServiceCollection services)
         {
-            services.AddSwaggerGen(c =>
+            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+            services.AddSwaggerGen(options =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Title = $"APIAggregation ({Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")} @ {Environment.MachineName} v{typeof(Program).Assembly.GetName().Version})",
-                    Description = "Simple API Aggregation",
-                    Version = "1",
-                    Contact = new OpenApiContact()
-                    {
-                        Name = "Kotis Antonis",
-                        Email = "antkotis@hotmail.com"
-                    }
-                });
-
-                // Set the comments path for the Swagger JSON and UI.
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath, includeControllerXmlComments: true);
+                // Add a custom operation filter which sets default values
+                options.OperationFilter<SwaggerDefaultValues>();
             });
 
             return services;
@@ -72,6 +64,42 @@ namespace APIAggregation.Helpers
             return services;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="app"></param>
+        /// <returns></returns>
+        public static IApplicationBuilder ConfigureDocumentationUI(this IApplicationBuilder app, IReadOnlyList<ApiVersionDescription> descriptions)
+        {
+            app.UseSwagger(options =>
+            {
+                options.RouteTemplate = "swagger/{documentName}/swagger.json";
+            });
+
+            app.UseSwaggerUI(options =>
+            {
+                options.RoutePrefix = "swagger";
+
+                foreach (var description in descriptions)
+                {
+                    options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
+                }
+            });
+
+            // api-docs-v1
+            // api-docs-v2
+            foreach (var description in descriptions)
+            {
+                app.UseReDoc(options =>
+                {
+                    options.DocumentTitle = $"API Documentation {description.GroupName}";
+                    options.SpecUrl = $"/swagger/{description.GroupName}/swagger.json";
+                    options.RoutePrefix = $"api-docs-{description.GroupName}";
+                });
+            }
+
+            return app;
+        }
 
         #region HttpClientFactory
 

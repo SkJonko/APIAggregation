@@ -1,11 +1,9 @@
 using APIAggregation;
 using APIAggregation.Helpers;
-using Microsoft.Extensions.Configuration;
+using Asp.Versioning;
 using Serilog;
 using Serilog.Exceptions;
 using Serilog.Sinks.OpenTelemetry;
-using System.Net.Sockets;
-using System.Xml.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,14 +11,12 @@ var builder = WebApplication.CreateBuilder(args);
 var configurationSettings = new ConfigurationSettings(builder.Configuration);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.SwaggerGenerator();
-
 
 
 builder.Host.UseSerilog((hostBuilderContext, serviceProvider, loggerConfiguration) =>
@@ -73,14 +69,25 @@ builder.Host.UseSerilog((hostBuilderContext, serviceProvider, loggerConfiguratio
 
 builder.Services.AddServicesInDI(configurationSettings);
 
+builder.Services.AddApiVersioning(versionOptions =>
+{
+    versionOptions.AssumeDefaultVersionWhenUnspecified = true;
+    versionOptions.DefaultApiVersion = new ApiVersion(1, 0);
+    versionOptions.ReportApiVersions = true;
+})
+    .AddMvc()
+    .AddApiExplorer(options =>
+    {
+        options.GroupNameFormat = "'v'VVV";
+        options.SubstituteApiVersionInUrl = true;
+    });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    app.ConfigureDocumentationUI(app.DescribeApiVersions());
+
 
 app.UseHttpsRedirection();
 
@@ -89,12 +96,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseMiddleware(typeof(HandlingMiddleware));
-
-app.UseReDoc(options =>
-{
-    options.DocumentTitle = "Swagger Documentation";
-    options.SpecUrl = "/swagger/v1/swagger.json";
-    options.HideHostname();
-});
 
 app.Run();
