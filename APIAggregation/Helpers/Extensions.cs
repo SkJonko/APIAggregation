@@ -68,6 +68,7 @@ namespace APIAggregation.Helpers
         /// 
         /// </summary>
         /// <param name="app"></param>
+        /// <param name="descriptions"></param>
         /// <returns></returns>
         public static IApplicationBuilder ConfigureDocumentationUI(this IApplicationBuilder app, IReadOnlyList<ApiVersionDescription> descriptions)
         {
