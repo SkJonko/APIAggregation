@@ -314,13 +314,6 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:APIAggregation.Helpers.Extensions.AddTransientHttpErrorPolicy_AdvancedCircuitBreaker(Microsoft.Extensions.DependencyInjection.IHttpClientBuilder)">
-            <summary>
-            Method to add advanced Circuit Breaker Policy in our 
-            </summary>
-            <param name="builder"></param>
-            <returns></returns>
-        </member>
         <member name="M:APIAggregation.Helpers.Extensions.ToWeatherResponseModel(APIAggregation.WebServiceRequests.OpenWeatherMap.OpenWeatherMapResponse)">
             <summary>
             Extensions that converts the response of Open Weather to response Model

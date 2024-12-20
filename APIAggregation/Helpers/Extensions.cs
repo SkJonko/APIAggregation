@@ -1,19 +1,15 @@
-﻿using APIAggregation.Services.Weather;
-using APIAggregation.WebServiceRequests.OpenWeatherMap;
-using APIAggregation.WebServiceRequests;
-using Microsoft.Extensions.Options;
-using APIAggregation.WebServiceRequests.Sera;
-using Newtonsoft.Json;
-using Microsoft.OpenApi.Models;
-using System.Reflection;
-using APIAggregation.Services.Joke;
-using Polly.CircuitBreaker;
-using Polly;
-using Asp.Versioning;
-using Swashbuckle.AspNetCore.SwaggerGen;
+﻿using APIAggregation.Services.Joke;
+using APIAggregation.Services.Weather;
 using APIAggregation.Swagger;
-using System.Collections.Generic;
+using APIAggregation.WebServiceRequests;
+using APIAggregation.WebServiceRequests.OpenWeatherMap;
+using APIAggregation.WebServiceRequests.Sera;
 using Asp.Versioning.ApiExplorer;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using Polly.CircuitBreaker;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Reflection;
 
 namespace APIAggregation.Helpers
 {
@@ -60,9 +56,9 @@ namespace APIAggregation.Helpers
 
             services.AddScoped<JokeService>();
 
-            services.AddHttpClient(HttpClients.OpenWeather).AddTransientHttpErrorPolicy_AdvancedCircuitBreaker();
-            services.AddHttpClient(HttpClients.WeatherVisual).AddTransientHttpErrorPolicy_AdvancedCircuitBreaker();
-            services.AddHttpClient(HttpClients.JokeApi).AddTransientHttpErrorPolicy_AdvancedCircuitBreaker();
+            services.AddHttpClient(HttpClients.OpenWeather);
+            services.AddHttpClient(HttpClients.WeatherVisual);
+            services.AddHttpClient(HttpClients.JokeApi);
 
             services.AddMemoryCache();
 
@@ -157,18 +153,16 @@ namespace APIAggregation.Helpers
                     RequestUri = new Uri(uri)
                 };
 
-                using (var client = httpClient.CreateClient(httpClientName))
-                {
-                    using (var result = await client.SendAsync(req, cancellationToken))
-                    {
-                        var stringResponse = await result.Content.ReadAsStringAsync(cancellationToken);
+                using var client = httpClient.CreateClient(httpClientName);
 
-                        if (result.IsSuccessStatusCode)
-                            return stringResponse;
-                        else
-                            throw new Exception($"{result.StatusCode} {stringResponse}");
-                    }
-                }
+                using var result = await client.SendAsync(req, cancellationToken);
+
+                var stringResponse = await result.Content.ReadAsStringAsync(cancellationToken);
+
+                if (result.IsSuccessStatusCode)
+                    return stringResponse;
+                else
+                    throw new Exception($"{result.StatusCode} {stringResponse}");
             }
             catch (TaskCanceledException taskException)
             {
@@ -184,14 +178,14 @@ namespace APIAggregation.Helpers
             }
         }
 
-        /// <summary>
-        /// Method to add advanced Circuit Breaker Policy in our 
-        /// </summary>
-        /// <param name="builder"></param>
-        /// <returns></returns>
-        private static IHttpClientBuilder AddTransientHttpErrorPolicy_AdvancedCircuitBreaker(this IHttpClientBuilder builder)
-            => builder.AddTransientHttpErrorPolicy(policy => policy.AdvancedCircuitBreakerAsync(0.25, TimeSpan.FromSeconds(30), 5, TimeSpan.FromSeconds(30)));
-        
+        ///// <summary>
+        ///// Method to add advanced Circuit Breaker Policy in our 
+        ///// </summary>
+        ///// <param name="builder"></param>
+        ///// <returns></returns>
+        //private static IHttpClientBuilder AddTransientHttpErrorPolicy_AdvancedCircuitBreaker(this IHttpClientBuilder builder)
+        //    => builder.AddTransientHttpErrorPolicy(policy => policy.AdvancedCircuitBreakerAsync(0.25, TimeSpan.FromSeconds(30), 5, TimeSpan.FromSeconds(30)));
+
         #endregion HttpClientFactory
 
 

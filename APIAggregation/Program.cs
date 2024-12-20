@@ -82,6 +82,8 @@ builder.Services.AddApiVersioning(versionOptions =>
         options.SubstituteApiVersionInUrl = true;
     });
 
+builder.AddServiceDefaults();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -95,6 +97,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.UseMiddleware(typeof(HandlingMiddleware));
+app.UseMiddleware<HandlingMiddleware>();
 
 app.Run();

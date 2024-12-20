@@ -5,6 +5,10 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIAggregation", "APIAggregation\APIAggregation.csproj", "{F1CDE469-E749-4CCF-A137-3A4BBB112469}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIAggregation.Aspire.AppHost", "APIAggregation.Aspire\APIAggregation.Aspire.AppHost\APIAggregation.Aspire.AppHost.csproj", "{CBDC2B6A-DED5-43CC-858F-BA28BAD51471}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIAggregation.Aspire.ServiceDefaults", "APIAggregation.Aspire\APIAggregation.Aspire.ServiceDefaults\APIAggregation.Aspire.ServiceDefaults.csproj", "{AA6F9492-9D21-4EBF-B3F2-E2E359490E2F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{F1CDE469-E749-4CCF-A137-3A4BBB112469}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1CDE469-E749-4CCF-A137-3A4BBB112469}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1CDE469-E749-4CCF-A137-3A4BBB112469}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBDC2B6A-DED5-43CC-858F-BA28BAD51471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBDC2B6A-DED5-43CC-858F-BA28BAD51471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBDC2B6A-DED5-43CC-858F-BA28BAD51471}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBDC2B6A-DED5-43CC-858F-BA28BAD51471}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA6F9492-9D21-4EBF-B3F2-E2E359490E2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA6F9492-9D21-4EBF-B3F2-E2E359490E2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA6F9492-9D21-4EBF-B3F2-E2E359490E2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA6F9492-9D21-4EBF-B3F2-E2E359490E2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
